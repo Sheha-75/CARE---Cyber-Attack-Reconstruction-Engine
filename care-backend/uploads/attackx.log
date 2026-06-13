@@ -1,0 +1,7 @@
+LOGIN user=admin ip=192.168.1.10
+
+FAILED login user=root ip=192.168.1.15
+
+Malware detected on workstation WS-01
+
+LOGIN user=john ip=192.168.1.20

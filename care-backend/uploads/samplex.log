@@ -1,0 +1,11 @@
+if (
+    evidence.getFileType().equalsIgnoreCase("log")
+    ||
+    evidence.getFileType().equalsIgnoreCase("txt")
+) {
+
+    logParserService.parseLogFile(
+            caseId,
+            evidence.getFilePath()
+    );
+}
