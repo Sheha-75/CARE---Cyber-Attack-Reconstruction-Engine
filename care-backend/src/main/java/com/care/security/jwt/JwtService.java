@@ -32,7 +32,7 @@ public class JwtService {
                 .compact();
     }
 
-    public String extractEmail(String token) {
+    public String extractUsername(String token) {
 
         Claims claims = Jwts.parser()
                 .verifyWith(getSigningKey())
@@ -46,13 +46,17 @@ public class JwtService {
     public boolean isTokenValid(String token) {
 
         try {
-            Jwts.parser()
+
+            Claims claims = Jwts.parser()
                     .verifyWith(getSigningKey())
                     .build()
-                    .parseSignedClaims(token);
+                    .parseSignedClaims(token)
+                    .getPayload();
 
-            return true;
+            return !claims.getExpiration().before(new Date());
+
         } catch (Exception e) {
+
             return false;
         }
     }
