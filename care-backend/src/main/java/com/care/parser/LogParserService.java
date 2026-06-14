@@ -31,7 +31,7 @@ public class LogParserService {
 
                 if (line.toLowerCase().contains("login")) {
 
-                    timelineService.createEvent(
+                    timelineService.addEvent(
                             caseId,
                             "LOGIN_EVENT",
                             line
@@ -40,7 +40,7 @@ public class LogParserService {
 
                 if (line.toLowerCase().contains("failed")) {
 
-                    timelineService.createEvent(
+                    timelineService.addEvent(
                             caseId,
                             "FAILED_LOGIN",
                             line
@@ -49,7 +49,7 @@ public class LogParserService {
 
                 if (line.toLowerCase().contains("malware")) {
 
-                    timelineService.createEvent(
+                    timelineService.addEvent(
                             caseId,
                             "MALWARE_ALERT",
                             line

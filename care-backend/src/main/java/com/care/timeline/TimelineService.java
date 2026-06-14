@@ -1,27 +1,46 @@
-public TimelineEvent createEvent(
-        Long caseId,
-        String eventType,
-        String description
-) {
+package com.care.timeline;
 
-    InvestigationCase investigationCase =
-            caseRepository.findById(caseId)
-                    .orElseThrow();
+import com.care.case_management.Case;
+import com.care.case_management.CaseRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-    TimelineEvent event =
-            new TimelineEvent();
+import java.time.LocalDateTime;
+import java.util.List;
 
-    event.setEventType(eventType);
+@Service
+@RequiredArgsConstructor
+public class TimelineService {
 
-    event.setDescription(description);
+    private final TimelineEventRepository timelineRepository;
+    private final CaseRepository caseRepository;
 
-    event.setEventTime(
-            LocalDateTime.now()
-    );
+    public TimelineEvent addEvent(
+            Long caseId,
+            String eventType,
+            String description
+    ) {
 
-    event.setInvestigationCase(
-            investigationCase
-    );
+        Case investigationCase =
+                caseRepository.findById(caseId)
+                        .orElseThrow(() ->
+                                new RuntimeException("Case not found"));
 
-    return timelineRepository.save(event);
+        TimelineEvent event = new TimelineEvent();
+
+        event.setEventType(eventType);
+        event.setDescription(description);
+        event.setEventTime(LocalDateTime.now());
+        event.setInvestigationCase(investigationCase);
+
+        return timelineRepository.save(event);
+    }
+
+    public List<TimelineEvent> getTimeline(
+            Long caseId
+    ) {
+
+        return timelineRepository
+                .findByInvestigationCaseIdOrderByEventTimeAsc(caseId);
+    }
 }

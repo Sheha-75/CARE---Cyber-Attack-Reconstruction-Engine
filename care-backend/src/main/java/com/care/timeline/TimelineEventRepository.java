@@ -10,4 +10,8 @@ public interface TimelineEventRepository
     List<TimelineEvent> findByInvestigationCaseIdOrderByEventTimeAsc(
             Long caseId
     );
+
+    List<TimelineEvent> findByInvestigationCaseId(
+            Long caseId
+    );
 }
