@@ -2,5 +2,13 @@ package com.care.case_management;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CaseRepository extends JpaRepository<Case, Long> {
+import java.util.Optional;
+
+public interface CaseRepository
+        extends JpaRepository<InvestigationCase, Long> {
+
+    Optional<InvestigationCase> findByCaseNumber(
+            String caseNumber
+    );
+
 }
