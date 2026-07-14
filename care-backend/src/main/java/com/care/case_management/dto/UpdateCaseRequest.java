@@ -1,7 +1,9 @@
 package com.care.case_management.dto;
 
-import com.care.case_management.CaseStatus;
-import com.care.case_management.Severity;
+import com.care.case_management.enums.CaseStatus;
+import com.care.case_management.enums.Severity;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +11,16 @@ import lombok.Setter;
 @Setter
 public class UpdateCaseRequest {
 
+    @NotBlank(message = "Case title is required")
     private String title;
 
+    @NotBlank(message = "Case description is required")
     private String description;
 
+    @NotNull(message = "Severity is required")
     private Severity severity;
 
+    @NotNull(message = "Case status is required")
     private CaseStatus status;
 
 }

@@ -1,7 +1,7 @@
 package com.care.timeline;
 
-import com.care.case_management.Case;
 import com.care.case_management.CaseRepository;
+import com.care.case_management.InvestigationCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,26 +21,25 @@ public class TimelineService {
             String description
     ) {
 
-        Case investigationCase =
+        InvestigationCase investigationCase =
                 caseRepository.findById(caseId)
                         .orElseThrow(() ->
                                 new RuntimeException("Case not found"));
 
         TimelineEvent event = new TimelineEvent();
 
+        event.setEventTime(LocalDateTime.now());
         event.setEventType(eventType);
         event.setDescription(description);
-        event.setEventTime(LocalDateTime.now());
         event.setInvestigationCase(investigationCase);
 
         return timelineRepository.save(event);
     }
 
-    public List<TimelineEvent> getTimeline(
-            Long caseId
-    ) {
+    public List<TimelineEvent> getTimeline(Long caseId) {
 
         return timelineRepository
                 .findByInvestigationCaseIdOrderByEventTimeAsc(caseId);
+
     }
 }

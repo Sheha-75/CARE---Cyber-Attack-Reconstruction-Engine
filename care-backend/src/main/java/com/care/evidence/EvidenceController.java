@@ -1,6 +1,7 @@
 package com.care.evidence;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,41 +16,33 @@ public class EvidenceController {
     private final EvidenceService evidenceService;
 
     @PostMapping("/upload")
-    public Evidence uploadEvidence(
-
+    public ResponseEntity<Evidence> uploadEvidence(
             @RequestParam Long caseId,
-
             @RequestParam MultipartFile file
-
     ) throws IOException {
 
-        return evidenceService.uploadEvidence(
-                caseId,
-                file
+        return ResponseEntity.ok(
+                evidenceService.uploadEvidence(caseId, file)
         );
     }
 
     @GetMapping("/case/{caseId}")
-    public List<Evidence> getEvidenceByCase(
-
+    public ResponseEntity<List<Evidence>> getEvidenceByCase(
             @PathVariable Long caseId
-
     ) {
 
-        return evidenceService.getEvidenceByCase(
-                caseId
+        return ResponseEntity.ok(
+                evidenceService.getEvidenceByCase(caseId)
         );
     }
 
     @GetMapping("/verify/{evidenceId}")
-    public EvidenceVerificationResponse verifyEvidence(
-
+    public ResponseEntity<EvidenceVerificationResponse> verifyEvidence(
             @PathVariable Long evidenceId
-
     ) {
 
-        return evidenceService.verifyEvidence(
-                evidenceId
+        return ResponseEntity.ok(
+                evidenceService.verifyEvidence(evidenceId)
         );
     }
 }

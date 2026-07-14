@@ -16,5 +16,7 @@ public class DashboardController {
     public DashboardResponse getStats() {
 
         return dashboardService.getStats();
+
     }
+
 }

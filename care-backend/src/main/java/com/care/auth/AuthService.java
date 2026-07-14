@@ -1,14 +1,17 @@
 package com.care.auth;
 
-import com.care.auth.dto.RegisterRequest;
-import com.care.role.*;
-import com.care.user.*;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import com.care.auth.dto.LoginRequest;
 import com.care.auth.dto.LoginResponse;
+import com.care.auth.dto.RegisterRequest;
+import com.care.role.Role;
+import com.care.role.RoleRepository;
+import com.care.role.RoleType;
 import com.care.security.jwt.JwtService;
+import com.care.user.User;
+import com.care.user.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -21,10 +24,18 @@ public class AuthService {
 
     public String register(RegisterRequest request) {
 
+        // Check whether the email is already registered
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Email is already registered.");
+        }
+
+        // Get the default INVESTIGATOR role
         Role investigatorRole = roleRepository
                 .findByName(RoleType.INVESTIGATOR)
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new RuntimeException("Default role not found."));
 
+        // Create a new user
         User user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -35,26 +46,26 @@ public class AuthService {
 
         userRepository.save(user);
 
-        return "User Registered Successfully";
+        return "User registered successfully.";
     }
 
     public LoginResponse login(LoginRequest request) {
 
+        // Find user by email
         User user = userRepository
                 .findByEmail(request.getEmail())
                 .orElseThrow(() ->
-                        new RuntimeException("User not found"));
+                        new RuntimeException("Invalid email or password."));
 
-        boolean validPassword =
-                passwordEncoder.matches(
-                        request.getPassword(),
-                        user.getPassword()
-                );
+        // Verify password
+        if (!passwordEncoder.matches(
+                request.getPassword(),
+                user.getPassword())) {
 
-        if (!validPassword) {
-            throw new RuntimeException("Invalid password");
+            throw new RuntimeException("Invalid email or password.");
         }
 
+        // Generate JWT
         String token = jwtService.generateToken(user.getEmail());
 
         return new LoginResponse(token);

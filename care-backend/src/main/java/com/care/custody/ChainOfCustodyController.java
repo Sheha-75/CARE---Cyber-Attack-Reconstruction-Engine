@@ -1,6 +1,7 @@
 package com.care.custody;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,14 +14,12 @@ public class ChainOfCustodyController {
     private final ChainOfCustodyService custodyService;
 
     @GetMapping("/{evidenceId}")
-    public List<ChainOfCustody> getHistory(
-
+    public ResponseEntity<List<ChainOfCustody>> getHistory(
             @PathVariable Long evidenceId
-
     ) {
 
-        return custodyService.getHistory(
-                evidenceId
+        return ResponseEntity.ok(
+                custodyService.getHistory(evidenceId)
         );
     }
 }

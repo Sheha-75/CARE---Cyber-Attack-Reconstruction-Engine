@@ -1,5 +1,6 @@
 package com.care.case_management;
 
+import com.care.case_management.enums.CaseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,22 +12,32 @@ public class CaseService {
 
     private final CaseRepository caseRepository;
 
-    public Case createCase(Case investigationCase) {
+    public InvestigationCase createCase(
+            InvestigationCase investigationCase
+    ) {
 
-        investigationCase.setStatus(CaseStatus.OPEN);
+        investigationCase.setStatus(
+                CaseStatus.OPEN
+        );
 
-        return caseRepository.save(investigationCase);
+        return caseRepository.save(
+                investigationCase
+        );
     }
 
-    public List<Case> getAllCases() {
+    public List<InvestigationCase> getAllCases() {
 
         return caseRepository.findAll();
     }
 
-    public Case getCaseById(Long id) {
+    public InvestigationCase getCaseById(
+            Long id
+    ) {
 
         return caseRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("Case not found"));
+                        new RuntimeException(
+                                "Case not found"
+                        ));
     }
 }

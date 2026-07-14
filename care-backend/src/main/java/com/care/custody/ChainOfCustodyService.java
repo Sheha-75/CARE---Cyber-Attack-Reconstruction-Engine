@@ -21,42 +21,23 @@ public class ChainOfCustodyService {
             String performedBy
     ) {
 
-        Evidence evidence =
-                evidenceRepository.findById(evidenceId)
-                        .orElseThrow(() ->
-                                new RuntimeException(
-                                        "Evidence not found"
-                                ));
+        Evidence evidence = evidenceRepository.findById(evidenceId)
+                .orElseThrow(() ->
+                        new RuntimeException("Evidence not found"));
 
-        ChainOfCustody record =
-                new ChainOfCustody();
+        ChainOfCustody record = new ChainOfCustody();
 
         record.setAction(action);
+        record.setPerformedBy(performedBy);
+        record.setTimestamp(LocalDateTime.now());
+        record.setEvidence(evidence);
 
-        record.setPerformedBy(
-                performedBy
-        );
-
-        record.setTimestamp(
-                LocalDateTime.now()
-        );
-
-        record.setEvidence(
-                evidence
-        );
-
-        custodyRepository.save(
-                record
-        );
+        custodyRepository.save(record);
     }
 
-    public List<ChainOfCustody> getHistory(
-            Long evidenceId
-    ) {
+    public List<ChainOfCustody> getHistory(Long evidenceId) {
 
-        return custodyRepository
-                .findByEvidenceId(
-                        evidenceId
-                );
+        return custodyRepository.findByEvidenceId(evidenceId);
+
     }
 }

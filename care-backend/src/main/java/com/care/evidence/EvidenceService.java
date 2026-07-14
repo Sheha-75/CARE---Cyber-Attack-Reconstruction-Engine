@@ -1,6 +1,6 @@
 package com.care.evidence;
 
-import com.care.case_management.Case;
+import com.care.case_management.InvestigationCase;
 import com.care.case_management.CaseRepository;
 import com.care.custody.ChainOfCustodyService;
 import com.care.parser.LogParserService;
@@ -33,7 +33,7 @@ public class EvidenceService {
             MultipartFile file
     ) throws IOException {
 
-        Case investigationCase =
+        InvestigationCase investigationCase =
                 caseRepository.findById(caseId)
                         .orElseThrow(() ->
                                 new RuntimeException("Case not found"));

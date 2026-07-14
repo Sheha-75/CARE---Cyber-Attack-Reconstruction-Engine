@@ -97,7 +97,8 @@ public class SecurityConfig {
                         ).permitAll()
 
                         .requestMatchers(
-                                "/api/test/**"
+                                "/api/test/**",
+                                "/api/dashboard/**"
                         ).permitAll()
 
                         .anyRequest()

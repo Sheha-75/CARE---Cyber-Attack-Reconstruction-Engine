@@ -3,6 +3,7 @@ package com.care.custody;
 import com.care.evidence.Evidence;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,19 +12,23 @@ import java.time.LocalDateTime;
 @Table(name = "chain_of_custody")
 @Getter
 @Setter
+@NoArgsConstructor
 public class ChainOfCustody {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String action;
 
+    @Column(nullable = false)
     private String performedBy;
 
+    @Column(nullable = false)
     private LocalDateTime timestamp;
 
-    @ManyToOne
-    @JoinColumn(name = "evidence_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "evidence_id", nullable = false)
     private Evidence evidence;
 }

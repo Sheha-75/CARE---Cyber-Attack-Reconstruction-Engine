@@ -1,11 +1,11 @@
 package com.care.dashboard;
 
 import com.care.case_management.CaseRepository;
+import com.care.case_management.enums.CaseStatus;
 import com.care.evidence.EvidenceRepository;
 import com.care.timeline.TimelineEventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.care.case_management.CaseStatus;
 
 @Service
 @RequiredArgsConstructor
@@ -19,22 +19,17 @@ public class DashboardService {
 
     public DashboardResponse getStats() {
 
-        long totalCases =
-                caseRepository.count();
+        long totalCases = caseRepository.count();
 
-        long openCases =
-                caseRepository.findAll()
-                        .stream()
-                        .filter(c ->
-                                c.getStatus() == CaseStatus.OPEN
-                        )
-                        .count();
+        long openCases = caseRepository.findAll()
+                .stream()
+                .filter(caseItem ->
+                        caseItem.getStatus() == CaseStatus.OPEN)
+                .count();
 
-        long totalEvidence =
-                evidenceRepository.count();
+        long totalEvidence = evidenceRepository.count();
 
-        long totalTimelineEvents =
-                timelineRepository.count();
+        long totalTimelineEvents = timelineRepository.count();
 
         return new DashboardResponse(
                 totalCases,

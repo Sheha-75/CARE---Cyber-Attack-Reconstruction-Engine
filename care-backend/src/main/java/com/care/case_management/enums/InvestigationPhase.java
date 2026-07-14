@@ -1,4 +1,4 @@
-package com.care.case_management;
+package com.care.case_management.enums;
 
 public enum InvestigationPhase {
 
@@ -15,4 +15,5 @@ public enum InvestigationPhase {
     POST_INCIDENT_REVIEW,
 
     CLOSED
+
 }

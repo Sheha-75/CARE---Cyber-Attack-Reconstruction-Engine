@@ -13,26 +13,33 @@ public class CaseController {
     private final CaseService caseService;
 
     @PostMapping
-    public Case createCase(
-            @RequestBody Case investigationCase
+    public InvestigationCase createCase(
+
+            @RequestBody InvestigationCase investigationCase
+
     ) {
 
         return caseService.createCase(
                 investigationCase
         );
+
     }
 
     @GetMapping
-    public List<Case> getAllCases() {
+    public List<InvestigationCase> getAllCases() {
 
         return caseService.getAllCases();
+
     }
 
     @GetMapping("/{id}")
-    public Case getCaseById(
+    public InvestigationCase getCaseById(
+
             @PathVariable Long id
+
     ) {
 
         return caseService.getCaseById(id);
+
     }
 }
