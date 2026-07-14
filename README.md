@@ -1,298 +1,324 @@
-# CARE - Cyber Attack Reconstruction Engine
+# CARE – Cyber Attack Reconstruction Engine
+
+<p align="center">
+
+![Java](https://img.shields.io/badge/Java-21-red?style=for-the-badge&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5-green?style=for-the-badge&logo=springboot)
+![React](https://img.shields.io/badge/React-TypeScript-blue?style=for-the-badge&logo=react)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue?style=for-the-badge&logo=postgresql)
+![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)
+
+</p>
+
+---
 
 ## Overview
 
-CARE (Cyber Attack Reconstruction Engine) is a Digital Forensics and Incident Response (DFIR) platform designed to assist investigators in managing cyber incident investigations, preserving evidence integrity, reconstructing attack timelines, and generating intelligent incident summaries.
+CARE (Cyber Attack Reconstruction Engine) is an AI-powered **Digital Forensics and Incident Response (DFIR)** platform designed to assist cybersecurity professionals in investigating, reconstructing, and analyzing cyber incidents.
 
-The platform combines forensic evidence management, chain of custody tracking, timeline reconstruction, log analysis, and AI-assisted incident summarization into a unified investigation system.
+The platform provides investigators with a centralized environment to manage investigations, securely collect and preserve digital evidence, maintain chain of custody records, reconstruct attack timelines, verify evidence integrity, and generate intelligent investigation summaries.
+
+CARE is being developed as an enterprise-grade cybersecurity platform with future support for AI-assisted investigations, MITRE ATT&CK mapping, automated reporting, and threat intelligence integration.
 
 ---
 
-## Key Features
+# Key Features
 
 ### Authentication & Security
 
-* User Registration
-* User Login
-* JWT Authentication
-* Protected API Endpoints
-* Stateless Security Architecture
+- JWT Authentication
+- Secure User Registration & Login
+- BCrypt Password Encryption
+- Spring Security Integration
+- Role-Based Access Architecture
 
-### Case Management
+---
 
-* Create Investigation Cases
-* Manage Case Information
-* Track Investigation Status
+### Investigation Management
+
+- Create Investigation Cases
+- Unique Case Number Generation
+- Severity Classification
+- Investigation Status Tracking
+- Investigation Metadata Management
+
+---
 
 ### Evidence Management
 
-* Upload Digital Evidence
-* Store Evidence Metadata
-* Associate Evidence with Cases
-* Secure Evidence Repository
+- Secure Evidence Upload
+- SHA-256 Integrity Verification
+- Digital Evidence Storage
+- Evidence Metadata Tracking
+- Automated Evidence Validation
 
-### Evidence Integrity Verification
-
-* SHA-256 Hash Generation
-* Evidence Integrity Validation
-* Tamper Detection
+---
 
 ### Chain of Custody
 
-* Track Evidence Activities
-* Record Evidence Upload Events
-* Record Evidence Verification Events
-* Maintain Forensic Audit Trail
+- Complete Evidence Audit Trail
+- Investigator Activity Logging
+- Evidence Handling History
+- Forensic Integrity Preservation
+
+---
 
 ### Timeline Reconstruction
 
-* Create Investigation Events
-* Retrieve Case Timelines
-* Chronological Event Management
-
-### Log Parser Engine
-
-* Parse Uploaded Log Files
-* Detect Login Events
-* Detect Failed Login Attempts
-* Detect Malware Alerts
-* Automatically Generate Timeline Events
-
-### AI Incident Summary Engine
-
-* Analyze Investigation Timeline
-* Determine Risk Level
-* Generate Incident Summary
-* Provide Investigation Recommendations
+- Incident Timeline Generation
+- Log File Parsing
+- Event Correlation
+- Chronological Attack Reconstruction
 
 ---
 
-## Technology Stack
+### Investigation Summary
 
-### Backend
-
-* Java 21
-* Spring Boot 3
-* Spring Security
-* Spring Data JPA
-* Maven
-
-### Database
-
-* PostgreSQL
-
-### Security
-
-* JWT Authentication
-* SHA-256 Hashing
-
-### Development Tools
-
-* IntelliJ IDEA
-* Postman
-* Git
-* GitHub
+- Automated Investigation Summary
+- Risk Assessment
+- Security Recommendations
+- Incident Overview Generation
 
 ---
 
-## Project Structure
+### Dashboard
 
-```text
-CARE---Cyber-Attack-Reconstruction-Engine
+- Investigation Statistics
+- Open Case Monitoring
+- Evidence Statistics
+- Timeline Statistics
 
-├── care-backend
-│   ├── auth
-│   ├── case_management
-│   ├── custody
-│   ├── evidence
-│   ├── parser
-│   ├── security
-│   ├── summary
-│   ├── timeline
-│   └── user
-│
-├── uploads
-│
-├── project-assets
-│
-└── README.md
+---
+
+# Technology Stack
+
+## Backend
+
+- Java 21
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+- Hibernate
+- Maven
+
+## Frontend *(In Progress)*
+
+- React
+- TypeScript
+- Material UI
+- Axios
+
+## Database
+
+- PostgreSQL
+
+## Security
+
+- JWT Authentication
+- BCrypt Password Hashing
+- SHA-256 Evidence Integrity Verification
+
+## AI *(Planned)*
+
+- Python
+- LangChain
+- Local LLM
+- MITRE ATT&CK Mapping
+
+---
+
+# Project Architecture
+
+```
+                 React Frontend
+                        │
+                        ▼
+            Spring Boot REST API
+                        │
+ ┌───────────────┬───────────────┬───────────────┐
+ │               │               │               │
+ ▼               ▼               ▼               ▼
+Authentication Investigation  Evidence      Timeline
+                               Management     Engine
+ │               │               │               │
+ └───────────────┴───────────────┴───────────────┘
+                        │
+                        ▼
+                 PostgreSQL Database
 ```
 
 ---
 
-## Database
+# Project Structure
 
-Database: PostgreSQL
+```
+care-backend
+│
+├── auth
+├── case_management
+├── config
+├── custody
+├── dashboard
+├── evidence
+├── parser
+├── role
+├── security
+├── summary
+├── timeline
+└── user
+```
 
-Example Configuration:
+---
+
+# Implemented Modules
+
+| Module | Status |
+|---------|--------|
+| Authentication | ✅ Completed |
+| User Management | ✅ Completed |
+| Role Management | ✅ Completed |
+| Investigation Management | ✅ Completed |
+| Evidence Management | ✅ Completed |
+| Chain of Custody | ✅ Completed |
+| Timeline Reconstruction | ✅ Completed |
+| Dashboard | ✅ Completed |
+| Investigation Summary | ✅ Completed |
+| Security Configuration | ✅ Completed |
+| PostgreSQL Integration | ✅ Completed |
+| React Frontend | 🚧 In Progress |
+| AI Investigation Engine | 📅 Planned |
+
+---
+
+# REST API
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/api/auth/register` | Register User |
+| POST | `/api/auth/login` | User Login |
+| POST | `/api/cases` | Create Investigation |
+| GET | `/api/cases` | Retrieve Investigations |
+| POST | `/api/evidence/upload` | Upload Evidence |
+| GET | `/api/evidence/case/{id}` | Retrieve Evidence |
+| GET | `/api/evidence/verify/{id}` | Verify Evidence |
+| POST | `/api/timeline/{caseId}` | Add Timeline Event |
+| GET | `/api/timeline/{caseId}` | View Timeline |
+| GET | `/api/dashboard/stats` | Dashboard Statistics |
+| GET | `/api/summary/case/{id}` | Investigation Summary |
+
+---
+
+# Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/CARE---Cyber-Attack-Reconstruction-Engine.git
+```
+
+Navigate to the backend
+
+```bash
+cd care-backend
+```
+
+Build the project
+
+```bash
+mvn clean install
+```
+
+Run the application
+
+```bash
+mvn spring-boot:run
+```
+
+---
+
+# Database Configuration
+
+Update the database configuration inside:
+
+```
+src/main/resources/application.properties
+```
+
+Example:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/care_db
 spring.datasource.username=postgres
-spring.datasource.password=your_password
+spring.datasource.password=YOUR_PASSWORD
 ```
 
 ---
 
-## API Endpoints
+# Roadmap
 
-### Authentication
+## Phase 1 ✅
 
-#### Register User
-
-```http
-POST /api/auth/register
-```
-
-#### Login
-
-```http
-POST /api/auth/login
-```
-
-Returns JWT Token.
+- Authentication
+- Investigation Management
+- Evidence Management
+- Timeline Engine
+- Chain of Custody
+- Dashboard
 
 ---
 
-### Evidence Management
+## Phase 2 🚧
 
-#### Upload Evidence
-
-```http
-POST /api/evidence/upload
-```
-
-#### Get Evidence By Case
-
-```http
-GET /api/evidence/case/{caseId}
-```
-
-#### Verify Evidence Integrity
-
-```http
-GET /api/evidence/verify/{evidenceId}
-```
+- React Frontend
+- Dashboard UI
+- Investigation Workspace
+- Evidence Upload Interface
+- Timeline Visualization
 
 ---
 
-### Chain of Custody
+## Phase 3 📅
 
-#### Get Custody Records
-
-```http
-GET /api/custody/{evidenceId}
-```
-
----
-
-### Timeline
-
-#### Create Timeline Event
-
-```http
-POST /api/timeline/{caseId}
-```
-
-#### Get Timeline
-
-```http
-GET /api/timeline/{caseId}
-```
+- AI Attack Reconstruction
+- MITRE ATT&CK Mapping
+- IOC Correlation
+- Threat Intelligence Integration
+- Automated Investigation Reports
+- PDF Report Generation
 
 ---
 
-### AI Summary
+# Future Enhancements
 
-#### Generate Incident Summary
-
-```http
-GET /api/summary/case/{caseId}
-```
-
-Example Response:
-
-```json
-{
-  "caseId": 1,
-  "riskLevel": "HIGH",
-  "summary": "Detected failed login attempts and malware-related activity.",
-  "recommendations": [
-    "Review timeline events",
-    "Reset affected credentials",
-    "Perform malware investigation",
-    "Isolate affected system"
-  ]
-}
-```
+- AI-assisted forensic investigations
+- Malware behavior analysis
+- IOC extraction
+- Threat intelligence feeds
+- Timeline visualization
+- Interactive evidence explorer
+- Automated forensic reporting
+- Digital evidence search
+- MITRE ATT&CK Navigator integration
+- Case collaboration
+- Audit logging
+- Cloud deployment
 
 ---
 
-## Example Investigation Workflow
+# License
 
-1. Create Investigation Case
-2. Upload Evidence
-3. Generate SHA-256 Hash
-4. Verify Evidence Integrity
-5. Record Chain of Custody
-6. Parse Log Files
-7. Generate Timeline Events
-8. Produce AI Incident Summary
+This project is released under the MIT License.
 
 ---
 
-## Current Project Status
+# Author
 
-### Completed
+**Shehani Lakshika Chandrakumar**
 
-* JWT Authentication
-* Case Management
-* Evidence Upload
-* SHA-256 Evidence Verification
-* Chain of Custody Tracking
-* Timeline Reconstruction
-* Log Parser Engine
-* AI Incident Summary Engine
+BSc (Hons) in Information Technology (Cyber Security)
 
-### Planned Enhancements
-
-* Dashboard Statistics API
-* React Frontend Dashboard
-* AI Investigator Assistant
-* Attack Chain Visualization
-* Threat Intelligence Integration
-* Automated Incident Reports
+Sri Lanka Institute of Information Technology (SLIIT)
 
 ---
 
-## Screenshots
-
-Add screenshots inside:
-
-```text
-project-assets/
-```
-
-Examples:
-
-* Evidence Upload
-* Evidence Verification
-* Chain of Custody
-* Timeline Events
-* JWT Login
-* AI Incident Summary
-
----
-
-## Author
-
-**Shehani Lakshika**
-
-Cyber Security Undergraduate | Digital Forensics Enthusiast | AI & Cybersecurity Researcher
-
----
-
-## License
-
-This project is developed for educational, research, and portfolio purposes.
-
+> **CARE is an enterprise Digital Forensics and Incident Response platform that combines secure evidence management, cyber attack reconstruction, and AI-assisted investigation capabilities to support modern cybersecurity operations.**
