@@ -1,6 +1,7 @@
 package com.care.case_management;
 
 import com.care.case_management.enums.CaseStatus;
+import com.care.case_management.enums.Priority;
 import com.care.case_management.enums.Severity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -35,7 +36,26 @@ public class InvestigationCase {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    private Priority priority;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private CaseStatus status;
+
+    @Column(nullable = false)
+    private String assignedInvestigator;
+
+    @Column(nullable = false)
+    private String incidentSource;
+
+    @Column(nullable = false)
+    private String affectedSystem;
+
+    @Column(nullable = false)
+    private LocalDateTime incidentOccurredAt;
+
+    @Column(nullable = false)
+    private LocalDateTime detectedAt;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
