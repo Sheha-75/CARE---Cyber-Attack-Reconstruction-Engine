@@ -80,21 +80,15 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers(
-                                "/api/auth/**"
-                        ).permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
 
-                        .requestMatchers(
-                                "/api/evidence/**"
-                        ).permitAll()
+                        .requestMatchers("/api/investigations/**").permitAll()
 
-                        .requestMatchers(
-                                "/api/custody/**"
-                        ).permitAll()
+                        .requestMatchers("/api/evidence/**").permitAll()
 
-                        .requestMatchers(
-                                "/api/timeline/**"
-                        ).permitAll()
+                        .requestMatchers("/api/custody/**").permitAll()
+
+                        .requestMatchers("/api/timeline/**").permitAll()
 
                         .requestMatchers(
                                 "/api/test/**",

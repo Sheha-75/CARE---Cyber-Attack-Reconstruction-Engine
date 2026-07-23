@@ -10,13 +10,14 @@ public interface InvestigationService {
 
     InvestigationResponse createInvestigation(CreateInvestigationRequest request);
 
-    List<InvestigationResponse> getAllInvestigations();
-
     InvestigationResponse getInvestigationById(Long id);
 
-    InvestigationResponse updateInvestigation(Long id,
-                                              UpdateInvestigationRequest request);
+    List<InvestigationResponse> getAllInvestigations();
+
+    InvestigationResponse updateInvestigation(
+            Long id,
+            UpdateInvestigationRequest request
+    );
 
     void deleteInvestigation(Long id);
-
 }
