@@ -17,9 +17,6 @@ import java.time.LocalDateTime;
 public class CreateInvestigationRequest {
 
 
-    @NotBlank(message = ValidationMessages.CASE_NUMBER_REQUIRED)
-    private String caseNumber;
-
     @NotBlank(message = ValidationMessages.TITLE_REQUIRED)
     private String title;
 

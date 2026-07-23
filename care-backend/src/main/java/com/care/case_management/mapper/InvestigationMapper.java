@@ -13,7 +13,6 @@ public class InvestigationMapper {
 
         InvestigationCase investigation = new InvestigationCase();
 
-        investigation.setCaseNumber(request.getCaseNumber());
         investigation.setTitle(request.getTitle());
         investigation.setDescription(request.getDescription());
         investigation.setSeverity(request.getSeverity());

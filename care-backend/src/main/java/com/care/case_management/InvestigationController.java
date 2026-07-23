@@ -1,5 +1,6 @@
 package com.care.case_management;
 
+import org.springframework.http.ResponseEntity;
 import com.care.case_management.dto.CreateInvestigationRequest;
 import com.care.case_management.dto.InvestigationResponse;
 import com.care.case_management.dto.UpdateInvestigationRequest;
@@ -8,6 +9,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import com.care.case_management.enums.CaseStatus;
+import com.care.case_management.enums.Severity;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -54,5 +58,32 @@ public class InvestigationController {
             @PathVariable Long id) {
 
         investigationService.deleteInvestigation(id);
+    }
+
+    @GetMapping("/search/title")
+    public ResponseEntity<List<InvestigationResponse>> searchByTitle(
+            @RequestParam String keyword) {
+
+        return ResponseEntity.ok(
+                investigationService.searchByTitle(keyword)
+        );
+    }
+
+    @GetMapping("/search/status")
+    public ResponseEntity<List<InvestigationResponse>> searchByStatus(
+            @RequestParam CaseStatus status) {
+
+        return ResponseEntity.ok(
+                investigationService.searchByStatus(status)
+        );
+    }
+
+    @GetMapping("/search/severity")
+    public ResponseEntity<List<InvestigationResponse>> searchBySeverity(
+            @RequestParam Severity severity) {
+
+        return ResponseEntity.ok(
+                investigationService.searchBySeverity(severity)
+        );
     }
 }
