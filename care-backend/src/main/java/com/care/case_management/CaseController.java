@@ -1,6 +1,8 @@
 package com.care.case_management;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,33 +15,29 @@ public class CaseController {
     private final CaseService caseService;
 
     @PostMapping
-    public InvestigationCase createCase(
+    public ResponseEntity<?> createCase(
+            @RequestBody InvestigationCase investigationCase) {
 
-            @RequestBody InvestigationCase investigationCase
+        System.out.println("========== CREATE CASE API CALLED ==========");
 
-    ) {
+        InvestigationCase savedCase =
+                caseService.createCase(investigationCase);
 
-        return caseService.createCase(
-                investigationCase
-        );
+        System.out.println("========== CASE CREATED ==========");
 
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(savedCase);
     }
 
     @GetMapping
-    public List<InvestigationCase> getAllCases() {
-
-        return caseService.getAllCases();
-
+    public ResponseEntity<List<InvestigationCase>> getAllCases() {
+        return ResponseEntity.ok(caseService.getAllCases());
     }
 
     @GetMapping("/{id}")
-    public InvestigationCase getCaseById(
+    public ResponseEntity<InvestigationCase> getCaseById(
+            @PathVariable Long id) {
 
-            @PathVariable Long id
-
-    ) {
-
-        return caseService.getCaseById(id);
-
+        return ResponseEntity.ok(caseService.getCaseById(id));
     }
 }

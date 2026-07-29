@@ -15,10 +15,10 @@ public class EvidenceController {
 
     private final EvidenceService evidenceService;
 
-    @PostMapping("/upload")
+    @PostMapping("/upload/{caseId}")
     public ResponseEntity<Evidence> uploadEvidence(
-            @RequestParam Long caseId,
-            @RequestParam MultipartFile file
+            @PathVariable Long caseId,
+            @RequestParam("file") MultipartFile file
     ) throws IOException {
 
         return ResponseEntity.ok(

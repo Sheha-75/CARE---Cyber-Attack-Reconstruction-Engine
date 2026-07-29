@@ -42,31 +42,23 @@ public class SecurityConfig {
                 )
         );
 
-        configuration.setAllowedHeaders(
-                List.of("*")
-        );
+        configuration.setAllowedHeaders(List.of("*"));
 
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
 
-        source.registerCorsConfiguration(
-                "/**",
-                configuration
-        );
+        source.registerCorsConfiguration("/**", configuration);
 
         return source;
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http
-    ) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http)
+            throws Exception {
 
-        System.out.println(
-                "========== SECURITY CONFIG LOADED =========="
-        );
+        System.out.println("========== SECURITY CONFIG LOADED ==========");
 
         http
                 .cors(cors -> {})
@@ -80,23 +72,30 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
+                        // Authentication
                         .requestMatchers("/api/auth/**").permitAll()
 
+                        // Investigation / Case APIs
+                        .requestMatchers("/api/cases/**").permitAll()
                         .requestMatchers("/api/investigations/**").permitAll()
 
+                        // Evidence APIs
                         .requestMatchers("/api/evidence/**").permitAll()
 
+                        // Chain of Custody
                         .requestMatchers("/api/custody/**").permitAll()
 
+                        // Timeline
                         .requestMatchers("/api/timeline/**").permitAll()
 
+                        // Dashboard & Test
                         .requestMatchers(
-                                "/api/test/**",
-                                "/api/dashboard/**"
+                                "/api/dashboard/**",
+                                "/api/test/**"
                         ).permitAll()
 
-                        .anyRequest()
-                        .authenticated()
+                        // Everything else requires authentication
+                        .anyRequest().authenticated()
                 )
 
                 .addFilterBefore(

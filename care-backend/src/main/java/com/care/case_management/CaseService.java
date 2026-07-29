@@ -13,31 +13,28 @@ public class CaseService {
     private final CaseRepository caseRepository;
 
     public InvestigationCase createCase(
-            InvestigationCase investigationCase
-    ) {
+            InvestigationCase investigationCase) {
 
-        investigationCase.setStatus(
-                CaseStatus.OPEN
-        );
+        System.out.println("========== CASE SERVICE ==========");
 
-        return caseRepository.save(
-                investigationCase
-        );
+        investigationCase.setStatus(CaseStatus.OPEN);
+
+        InvestigationCase savedCase =
+                caseRepository.save(investigationCase);
+
+        System.out.println(savedCase.getId());
+
+        return savedCase;
     }
 
     public List<InvestigationCase> getAllCases() {
-
         return caseRepository.findAll();
     }
 
-    public InvestigationCase getCaseById(
-            Long id
-    ) {
+    public InvestigationCase getCaseById(Long id) {
 
         return caseRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException(
-                                "Case not found"
-                        ));
+                        new RuntimeException("Case not found"));
     }
 }
